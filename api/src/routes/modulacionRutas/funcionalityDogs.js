@@ -1,35 +1,72 @@
 const axios = require("axios")
-const { Race, Temper } = require("../../db")
+const { Race, Temperament } = require("../../db")
 const { API_KEY } = process.env
+const expresion = /^[0-9]*$/
 
-
-module.exports = {
-    getAllDogs: async() => {
-        const dogs = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
-        //console.log(dogs)
-       return dogs.data.map((dog=>{
-              return{
-                id:dog.id,
-                name:dog.name,
-                temperament:dog.temperament,
-                image:dog.image,
-                weight:dog.weight,
-                life_span:dog.life_span,
-              }
+    const getAllDogs= () => {
+        const dogs = axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+        const dogsDb = Race.findAll({
+            include: [{ model: Temperament,attributes: ["name", "id"]}],   
+            
+        })
+       
+        return Promise.all([
+            dogs,
+            dogsDb
+        ])
+            .then(response => {
+                let [dogs, dogsDb] = response
+                console.log(dogsDb)
+                let dogsFromApi = dogs.data.map((dog => {
+                    return {
+                        id: dog.id,
+                        name: dog.name,
+                        temperament: dog.temperament?dog.temperament:[],
+                        image: dog.image,
+                        height: dog.height.metric,
+                        weight: dog.weight.metric,
+                        life_span: dog.life_span,
+                    }
+                }))
+                dogsFromApi=[...dogsFromApi, ...dogsDb]
+                return dogsFromApi
+            })
+    }
+    const getByName= (name) => {
+        let dog = axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
+            .then(info => info.data.map(dog => {
+                return {
+                    id: dog.id,
+                    name: dog.name,
+                    temperament: dog.temperament,
+                    image: dog.image,
+                    height: dog.height,
+                    weight: dog.weight,
+                    life_span: dog.life_span,
+                }
             }))
-    },
-    postDog: async (name, height, weight, life_span, temper) => {
+            .catch(e => e)
 
-        if (!name || !height || !weight || !life_span || !temper) throw new Error("faltan parametros a ingresar")
+        return dog.then(info => !info[0] ? "No existe un perro de esa raza" : info)
+    }
+    const postDog= async (name, height, weight, life_span, temper) => {
+
+        if (!name || !height || !weight || !life_span || !temper[0]) throw new Error("faltan parametros a ingresar")
         const newDog = await Race.create({ name, height, weight, life_span })
-        await newDog.addTemper(temper)
+        // await newDog.addTemper(temper)
+        await temper.forEach(e => {
+            newDog.addTemperament(e)
+        })
         return "Perrito creado"
 
-    },
-    getDogById: (idRaza) => {
-        let dog = Race.findByPk(idRaza, {
-            include: Temper
-        }).then(data => data)
+    }
+    const getDogById= async (idRaza) => {
+        console.log(idRaza)
+        let dogsArray=await getAllDogs()
+        idRaza=!expresion.test(idRaza)?idRaza:Number(idRaza)
+        let dog=dogsArray.filter(e=>e.id===idRaza)
+        // console.log(dog)
+        // dog.then(dog=>console.log(dog))// el metodo findByPk devuelve null si no encuentra nada
         return dog
     }
-}
+    module.exports = {getAllDogs,getByName,getDogById,postDog}

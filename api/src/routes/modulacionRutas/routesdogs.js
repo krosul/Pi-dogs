@@ -1,6 +1,4 @@
 const { Router } = require('express');
-const axios = require("axios")
-const { Race } = require("../../db")
 const funcionality = require("./funcionalityDogs")
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -20,18 +18,16 @@ router.get("/", async (req, res, next) => {
 router.post("/dog", async (req, res, next) => {
     try {
         const { name, height, weight, life_span, temper } = req.body
-        res.status(200).send(await funcionality.postDog(name, height, weight, life_span,temper))
+        res.status(200).send(await funcionality.postDog(name, height, weight, life_span, temper))
 
     } catch (error) { next(error) }
 })
-router.get("/race", async (req, res, next) => {
+router.get("/breed", async (req, res, next) => {
     try {
 
         const { name } = req.query
-        console.log(typeof name)
-        const dog = await axios.get(`https://api.thedogapi.com/v1/breeds/search?q=${name}`)
-        console.log(dog)
-        res.status(200).send(dog.data.length > 0 ? dog.data : "No hay perror de esa raza")
+        const dog = await funcionality.getByName(name)
+        res.status(200).send(dog)
     } catch (error) {
         next(error)
     }

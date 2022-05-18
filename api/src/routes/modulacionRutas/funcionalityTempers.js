@@ -1,10 +1,13 @@
 const axios = require("axios");
-const { Temper } = require("../../db");
+const { Temperament } = require("../../db");
 const { API_KEY } = process.env;
 
 module.exports = {
     getTemperaments: async () => {
-        let temperaments = await Temper.findAll()
+        let temperaments = await Temperament.findAll({
+            attributes:["name","id"],
+            throught:[]
+        })
         if (temperaments[0] !== undefined) return { data: temperaments }
 
         const datos = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
@@ -15,12 +18,12 @@ module.exports = {
 
         temperFinal = [...new Set(temperFinal.map(e => e[0]))]
         await temperFinal.forEach(e => {
-            Temper.create({
+            Temperament.create({
                 name: e
             })
         })
 
-        return { data: temperFinal }
+        return { data: temperFinal.map(e=>{return {"name":e}}) }
         // return "entro a la funcion getTemperaments"
     }
 }
