@@ -1,0 +1,21 @@
+.pageNumbers button {
+  padding: 10px;
+  border: transparent;
+  /* border-radius: 0%; */
+}
+
+/* .pageNumbers button.active {
+  background-color: rgb(193, 13, 13);
+  color: black;
+} */
+.pageNumbers button{
+    background-color: transparent;
+    color:rgb(15, 11, 11);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.pageNumbers button:hover{
+    background-color: white;
+    color:rgb(0, 0, 0);
+   
+}

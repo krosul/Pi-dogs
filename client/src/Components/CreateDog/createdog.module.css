@@ -1,0 +1,87 @@
+body {
+  background-image: url("https://images5.alphacoders.com/656/thumb-1920-656567.jpg");
+  background-size: 100%;
+  background-attachment: fixed;
+}
+.card {
+  width: 1125px;
+  display: flex;
+  height: 1100px;
+  border-radius: 30px;
+  background: #e0e0e0;
+  margin: 500px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: none;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.input {
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #e8e8e8;
+}
+.buttonF {
+  border: 1px solid seagreen;
+  border-radius: 5px;
+  background: rgb(255, 255, 255);
+  color: seagreen;
+  font-style: italic;
+  padding: 10px;
+  padding-right: 14px;
+  padding-left: 12px;
+  font-size: 17px;
+}
+.buttonF:hover {
+  background-color: seagreen;
+  color: white;
+  border: 1px solid seagreen;
+}
+.button {
+  border: 1px solid seagreen;
+  border-radius: 5px;
+  background: rgb(255, 255, 255);
+  color: seagreen;
+  font-style: italic;
+  padding: 10px;
+  padding-right: 14px;
+  padding-left: 12px;
+  font-size: 17px;
+}
+
+.button:hover {
+  background-color: seagreen;
+  color: white;
+  border: 1px solid seagreen;
+}
+.input {
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: #e8e8e8;
+}
+
+.buttonA {
+  border: 1px solid seagreen;
+  border-radius: 5px;
+  background: rgb(45, 214, 110);
+  color: seagreen;
+  font-style: italic;
+  padding: 10px;
+  padding-right: 14px;
+  padding-left: 12px;
+  font-size: 17px;
+}
+
+.buttonA:hover {
+  background-color: seagreen;
+  color: white;
+  border: 1px solid seagreen;
+}
