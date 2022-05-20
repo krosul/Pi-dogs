@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchByName } from "../../../store/actions";
+import styles from "./SearchByName.module.css";
 
 export default function SearchByName() {
   const expresion = /^(?=.*?[A-Za-z])[A-Za-z+]+$/;
@@ -19,13 +20,15 @@ export default function SearchByName() {
     dispatch(searchByName(input));
   }, [input]);
   return (
-    <>
+    <div className={styles.divContainer}>
+      search by race:
       <input
         type="text"
-        placeholder="search by breed"
+        placeholder="insert a race"
+        className={styles.f}
         value={input}
         onChange={(e) => setInputState(e)}
       ></input>
-    </>
+    </div>
   );
 }

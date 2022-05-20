@@ -1,4 +1,4 @@
-
+import axios from "axios"
 export const GET_ALL_DOGS = "GET_ALL_DOGS"
 export const GET_TEMPERAMENTS = "GET_TEMPERAMENTS"
 export const SET_ORDER_BY_NAME = "SET_ORDER_BY_NAME"
@@ -7,6 +7,9 @@ export const EXISTENCE = "EXISTENCE"
 export const FILTER_BY_TEMP = "FILTER_BY_TEMP"
 export const SEARCH_NAME = "SEARCH_NAME"
 export const GET_DETAIL="GET_DETAIL"
+export const POST_DOG="POST_DOG"
+export const RESET_DETAIL="RESET_DETAIL"
+
 
 export function getAllDogs() {
     return function (dispatch) {
@@ -27,10 +30,16 @@ export function getDetail(id){
         })
     }
 }
+export  function PostDogs(payload){
+    return async function(){
+        const response= await axios.post("http://localhost:3001/dogs/dog",payload);
+        return response
+    }
+}
 export function getTemperaments() {
     return function (dispatch) {
         return fetch("http://localhost:3001/temperament")
-            .then(info => info.json())
+        .then(info => info.json())
             .then(temperaments => dispatch({ type: GET_TEMPERAMENTS, payload: temperaments }))
             .catch(error => console.error(error))
     }
@@ -71,7 +80,7 @@ export function searchByName(payload) {
 }
 export function resetDetail(payload){
     return{
-        type:"RESET_DETAIL",
+        type:RESET_DETAIL,
         payload
     }
 }

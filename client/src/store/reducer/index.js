@@ -1,5 +1,5 @@
 /* eslint-disable no-fallthrough */
-import { FILTER_BY_TEMP, GET_ALL_DOGS,GET_DETAIL, SET_ORDER_BY_NAME, EXISTENCE, BY_HEIGHT, GET_TEMPERAMENTS, SEARCH_NAME } from "../actions"
+import { FILTER_BY_TEMP, GET_ALL_DOGS,GET_DETAIL, SET_ORDER_BY_NAME, EXISTENCE, BY_HEIGHT, GET_TEMPERAMENTS, SEARCH_NAME, RESET_DETAIL, POST_DOG } from "../actions"
 const ASCENDENTE = "ASCENDENTE"
 const DESCENDENTE = "DESCENDENTE"
 const ONLY_IN_DATA_BASE = "ONLY_IN_DATA_BASE"
@@ -152,7 +152,7 @@ export default function reducer(state = initialState, action) {
                 dog:action.payload
             }
         }
-        case "RESET_DETAIL":{
+        case RESET_DETAIL:{
             return {
                 ...state,
                 dog:[]

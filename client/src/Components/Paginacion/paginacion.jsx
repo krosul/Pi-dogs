@@ -65,13 +65,19 @@ export default function Paginado(props) {
 
   return (
     <div>
+      <div className={style.containerFromCards}>
+
       {dogsToShow.map((e) => e)}
+      </div>  
+
       <ul className={style.pageNumbers}>
+      <div className={style.numbers}>
         <button onClick={handlePrevPage} disabled={currentPage===pages[0]?true:false}>prev</button>
 
         {NumberOfPages}
 
         <button onClick={handleNextPage} disabled={currentPage===pages[pages.length-1]?true:false}>next</button>
+      </div>
       </ul>
     </div>
   );

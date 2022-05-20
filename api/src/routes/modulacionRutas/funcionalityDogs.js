@@ -49,12 +49,12 @@ const expresion = /^[0-9]*$/
 
         return dog.then(info => !info[0] ? "No existe un perro de esa raza" : info)
     }
-    const postDog= async (name, height, weight, life_span, temper) => {
+    const postDog= async (name, height, weight, life_span, temperament) => {
 
-        if (!name || !height || !weight || !life_span || !temper[0]) throw new Error("faltan parametros a ingresar")
+        if (!name || !height || !weight || !life_span || !temperament[0]) throw new Error("faltan parametros a ingresar")
         const newDog = await Race.create({ name, height, weight, life_span })
         // await newDog.addTemper(temper)
-        await temper.forEach(e => {
+        await temperament.forEach(e => {
             newDog.addTemperament(e)
         })
         return "Perrito creado"

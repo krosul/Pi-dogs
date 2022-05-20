@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTemperaments } from "../../store/actions";
+import { getTemperaments, PostDogs } from "../../store/actions";
 import style from "./createdog.module.css";
 import Validate from "./validaciones/Validate";
 
@@ -11,7 +11,16 @@ export default function Createdog() {
 // }
 // FUNCION PARA VOLVAR AL PRINCIPIO DE LA PAGINA
   let temperaments = useSelector((e) => e.temperaments.data);
-
+  let resetInput={
+    name: "",
+  maxHeight: "",
+  minHeight: "",
+  maxWeight: "",
+  minWeight: "",
+  maxlifeSpan: "",
+  minlifeSpan: "",
+  temperament: [],
+}
   let [input, setInput] = useState({
     name: "",
     maxHeight: "",
@@ -31,6 +40,7 @@ export default function Createdog() {
 
   function setStateInput(e) {
     e.preventDefault();
+    
 
     setInput({
       ...input,
@@ -42,8 +52,16 @@ export default function Createdog() {
   function onHandleSubmit(e) {
     e.preventDefault();
     console.log("entro a hacer el despacho de la accion para crear al nuevo perro")
+    dispatch(PostDogs({
+      name:`${input.name}`,
+      weight:`${input.minWeight} - ${input.maxWeight}`,
+      height:`${input.minHeight} - ${input.maxHeight}`,
+      life_span:`${input.minlifeSpan} - ${input.maxlifeSpan}`,
+      temperament:input.temperament
+    }))
+    setInput(resetInput)
+    alert("dog created")
   }
-  console.log(Object.keys(error).length&&input.name?true:false)
 
   
   
@@ -156,7 +174,10 @@ export default function Createdog() {
         <button 
         type="submit" 
         className={style.button}
-        disabled={Object.keys(error).length&&input.name?false:true}>
+        disabled={Object.keys(error).length!==0||!input.name||!input.maxHeight||!input.maxWeight||!input.maxlifeSpan||!input.minHeight||
+        !input.minWeight||!input.minlifeSpan||!input.temperament[0]
+        ?true
+        :false}>
           Finish
         </button>
       </form>

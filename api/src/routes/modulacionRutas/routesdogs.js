@@ -17,8 +17,8 @@ router.get("/", async (req, res, next) => {
 })
 router.post("/dog", async (req, res, next) => {
     try {
-        const { name, height, weight, life_span, temper } = req.body
-        res.status(200).send(await funcionality.postDog(name, height, weight, life_span, temper))
+        const { name, height, weight, life_span, temperament } = req.body
+        res.status(200).send(await funcionality.postDog(name, height, weight, life_span, temperament))
 
     } catch (error) { next(error) }
 })

@@ -6,7 +6,8 @@ import OrderByHeight from "../orderByHeight/orderByHeight";
 import SearchByExistence from "../SearchByExis/SearchByExis";
 import SearchByTemp from "../SearchByTemp/SearchByTemp";
 import { Link } from "react-router-dom";
-
+import styles from "./Navbar.module.css";
+import logo from "../../../image/2926722-removebg-preview.png";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -18,20 +19,33 @@ export default function Navbar() {
     dispatch(setOrderByName(e.target.value));
   }
   return (
-    <div>
-      {/* <div> */}
-        <SearchByExistence />
-      {/* </div> */}
-        <SearchByTemp/>
-        <OrderByHeight/>
-      <select onChange={(e) => setOrder(e)}>
-        <option value="ASCENDENTE">asc 👆</option>
-        <option value="DESCENDENTE">desc👇</option>
-      </select>
-        <SearchByName/>
-        <Link to="/dogs/create">
-        <button>Create Dog🐶</button>
+    <div className={styles.Principal}>
+      <div className={styles.containerSecondary}>
+        <img src={logo} alt="logo perrito" className={styles.logo} />
+        <Link to="/dogs" className={styles.a}>
+          Home
         </Link>
+        <div className={styles.containerFilters}>
+          <SearchByExistence />
+          <SearchByTemp />
+        </div>
+        <div className={styles.containerOrders}>
+          <OrderByHeight />
+          <div>
+            order alphabetically:
+            <select onChange={(e) => setOrder(e)} className={styles.f}>
+              <option value="ASCENDENTE">asc 👆</option>
+              <option value="DESCENDENTE">desc👇</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div className={styles.containerInput}>
+        <SearchByName />
+        <Link to="/dogs/create">
+          <button className={styles.button}><p className={styles.buttonContent}>Create Dog🐶</p></button>
+        </Link>
+      </div>
     </div>
   );
 }
