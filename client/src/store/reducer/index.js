@@ -1,5 +1,4 @@
-/* eslint-disable no-fallthrough */
-import { FILTER_BY_TEMP, GET_ALL_DOGS,GET_DETAIL, SET_ORDER_BY_NAME, EXISTENCE, BY_HEIGHT, GET_TEMPERAMENTS, SEARCH_NAME, RESET_DETAIL, POST_DOG } from "../actions"
+import { FILTER_BY_TEMP, GET_ALL_DOGS, GET_DETAIL, SET_ORDER_BY_NAME, EXISTENCE, BY_HEIGHT, GET_TEMPERAMENTS, SEARCH_NAME, RESET_DETAIL } from "../actions"
 const ASCENDENTE = "ASCENDENTE"
 const DESCENDENTE = "DESCENDENTE"
 const ONLY_IN_DATA_BASE = "ONLY_IN_DATA_BASE"
@@ -57,6 +56,7 @@ export default function reducer(state = initialState, action) {
                     dogs: [...state.dogs].sort((e, b) => e.name.toUpperCase() < b.name.toUpperCase() ? 1 : -1)
                 }
             }
+            break
         }
         case EXISTENCE: {
 
@@ -86,6 +86,7 @@ export default function reducer(state = initialState, action) {
                     dogs: [...state.filteredogs]
                 }
             }
+            break
         }
         case BY_HEIGHT: {
             if (action.payload === "heavy") {
@@ -95,9 +96,7 @@ export default function reducer(state = initialState, action) {
                     dogs: [...state.dogs].sort((a, b) => {
                         return parseInt(a.weight.split("-")[0]) < parseInt(b.weight.split("-")[0]) ? 1 : -1
                     }),
-                    // filteredogs: [...state.filteredogs].sort((a, b) => {
-                    //     return parseInt(a.weight.split("-")[0]) > parseInt(b.weight.split("-")[0] ? 1 : -1)
-                    // })
+
                 }
             }
             if (action.payload === "thin") {
@@ -107,9 +106,7 @@ export default function reducer(state = initialState, action) {
                     dogs: [...state.dogs].sort((a, b) => {
                         return parseInt(a.weight.split("-")[0]) > parseInt(b.weight.split("-")[0]) ? 1 : -1
                     }),
-                    // filteredogs: [...state.filteredogs].sort((a, b) => {
-                    //     return parseInt(a.weight.split("-")[0]) > parseInt(b.weight.split("-")[0] ? 1 : -1)
-                    // })
+
                 }
             }
             return {
@@ -131,31 +128,32 @@ export default function reducer(state = initialState, action) {
                 console.log("entro al caso del if dentro del filter by temp")
                 return {
                     ...state,
-                    dogs: [...state.filteredogs].filter(e => e.temperament.includes(action.payload))
+                    dogs: [...state.dogs].filter(e => e.temperament.includes(action.payload))
                 }
             }
 
         }
         case SEARCH_NAME: {
+            console.log(action.payload)
             return {
                 ...state,
                 dogs: action.payload ?
-                    [...state.dogs].filter(e => {
+                    [...state.filteredogs].filter(e => {
                         if (e.name.toLowerCase().includes(action.payload.toLowerCase())) return e
                     })
                     : [...state.filteredogs]
             }
         }
-        case GET_DETAIL:{
+        case GET_DETAIL: {
             return {
                 ...state,
-                dog:action.payload
+                dog: action.payload
             }
         }
-        case RESET_DETAIL:{
+        case RESET_DETAIL: {
             return {
                 ...state,
-                dog:[]
+                dog: []
             }
         }
 

@@ -22,9 +22,7 @@ export default function Navbar() {
     <div className={styles.Principal}>
       <div className={styles.containerSecondary}>
         <img src={logo} alt="logo perrito" className={styles.logo} />
-        <Link to="/dogs" className={styles.a}>
-          Home
-        </Link>
+
         <div className={styles.containerFilters}>
           <SearchByExistence />
           <SearchByTemp />
@@ -43,7 +41,9 @@ export default function Navbar() {
       <div className={styles.containerInput}>
         <SearchByName />
         <Link to="/dogs/create">
-          <button className={styles.button}><p className={styles.buttonContent}>Create Dog🐶</p></button>
+          <button className={styles.button}>
+            <p className={styles.buttonContent}>Create Dog🐶</p>
+          </button>
         </Link>
       </div>
     </div>

@@ -1,31 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import CartForDogs from "../cardForDogs/card";
 import style from "./paginacion.module.css";
+
+
+
+
+
 export default function Paginado(props) {
+
+  const dogs=useSelector(e=>e.dogs)
   const [currentPage, setCurrentPage] = useState(1); //para tener un estado que indica nuestr pagina actual
-
+  
   const [dogsPerPage, setdogsPerPage] = useState(8); //La cantidad de perros a mostrar en cada pagina
-
+  
   const [pageNumberLimit, setpageNumberLimit] = useState(5); //este estado es para la cantidad de
   //numeros de pagina que queremos mostrar
-
+  
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5); //El limite de paginas maximas
 
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0); //El limite de paginas minimas
 
   const indexOfLastItem = currentPage * dogsPerPage;
-
+  
   const indexOfFirstItem = indexOfLastItem - dogsPerPage;
-
+  
   const currentDogs = props.dogs.slice(indexOfFirstItem, indexOfLastItem);
   console.log(props.dogs);
   function handleClick(e) {
     setCurrentPage(Number(e.target.id));
   }
-
-  const dogsToShow = currentDogs.map((dog, index) => {
+  
+  const dogsToShow = currentDogs.map((dog) => {
     return <CartForDogs dog={dog} key={dog.id}></CartForDogs>;
   });
+  useEffect(()=>{
+    setCurrentPage(1)
+  },[dogs])
 
   const pages = [];
   for (let i = 1; i <= Math.ceil(props.dogs.length / dogsPerPage); i++) {

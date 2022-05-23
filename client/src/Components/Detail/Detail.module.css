@@ -1,34 +1,82 @@
+.card {
+  width: 50%;
+  height: 50%;
+  border-radius: 30px;
+  background-color: #874338;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(140, 146, 146, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  margin: auto;
+  padding: 1rem;
+  border: 2px solid #ccc;
+  /* IMPORTANTE */
+  text-align: center;
+}
+.image {
+  width: 50%;
+  height: 50%;
+}
+
 .loader {
-    --height-of-loader: 4px;
-    --loader-color: #0071e2;
-    width: 60%;
-    height: var(--height-of-loader);
-    border-radius: 30px;
-    background-color: rgba(0,0,0,0.2);
-    position: relative;
-   }
-   
-   .loader::before {
-    content: "";
-    position: absolute;
-    background: var(--loader-color);
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    border-radius: 30px;
-    animation: moving 1s ease-in-out infinite;
-    ;
-   }
-   
-   @keyframes moving {
-    50% {
-     width: 100%;
-    }
-   
-    100% {
-     width: 0;
-     right: 0;
-     left: unset;
-    }
-   }
+  --height-of-loader: 4px;
+  --loader-color: #0071e2;
+  width: 60%;
+  height: var(--height-of-loader);
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  background: var(--loader-color);
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  border-radius: 30px;
+  animation: moving 1s ease-in-out infinite;
+}
+
+@keyframes moving {
+  50% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+    right: 0;
+    left: unset;
+  }
+}
+
+.arrow {
+  margin-top: 39px;
+  margin-left: -967px;
+  box-sizing: border-box;
+  height: 2vw;
+  width: 2vw;
+  border-style: solid;
+  border-color: rgb(10, 6, 6);
+  border-width: 0px 1px 1px 0px;
+  transform: rotate(130deg);
+  transition: border-width 150ms ease-in-out;
+}
+
+.arrow:hover {
+  border-bottom-width: 4px;
+  border-right-width: 4px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full {
+  background-color: #256347;
+}
