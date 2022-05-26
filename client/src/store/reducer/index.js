@@ -10,7 +10,8 @@ const initialState = {
     dogs: [],
     dog: [],
     temperaments: [],
-    filteredogs: []
+    filteredogs: [],
+    Alldogs: []
 }
 
 
@@ -22,23 +23,43 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 dogs: action.payload.map(e => {
+                    if (e.id === 179) console.log(e)
                     if (!expresion.test(e.id) && !e.temperament) {
 
                         return {
                             ...e,
-                            "temperament": e.Temperaments.map(e => e.name).toString()
+                            "temperament": e.Temperaments.map(e => e.name).toString(),
+
                         }
                     }
-                    return e
+                    return {
+                        ...e,
+                        "weight": e.weight.split("-")[0].trim() === "NaN" ? e.weight.split("-")[1] : e.weight
+                    }
                 }),
                 filteredogs: action.payload.map(e => {
                     if (!expresion.test(e.id) && !e.temperament) {
                         return {
                             ...e,
-                            "temperament": e.Temperaments.map(e => e.name).toString()
+                            "temperament": e.Temperaments.map(e => e.name).toString(),
                         }
                     }
-                    return e
+                    return {
+                        ...e,
+                        "weight": e.weight.split("-")[0].trim() === "NaN" ? e.weight.split("-")[1] : e.weight
+                    }
+                }),
+                Alldogs: action.payload.map(e => {
+                    if (!expresion.test(e.id) && !e.temperament) {
+                        return {
+                            ...e,
+                            "temperament": e.Temperaments.map(e => e.name).toString(),
+                        }
+                    }
+                    return {
+                        ...e,
+                        "weight": e.weight.split("-")[0].trim() === "NaN" ? e.weight.split("-")[1] : e.weight
+                    }
                 }),
             }
         }
@@ -63,27 +84,38 @@ export default function reducer(state = initialState, action) {
             if (action.payload === ONLY_IN_API) {
                 return {
                     ...state,
-                    dogs: [...state.filteredogs].filter(e => {
+                    dogs: [...state.Alldogs].filter(e => {
                         if (expresion.test(e.id)) {
-                            console.log("entro al only in api")
+
                             return e
                         }
-                    })
+                    }),
+                    filteredogs: [...state.Alldogs].filter(e => {
+                        if (expresion.test(e.id)) {
+
+                            return e
+                        }
+                    }),
+
                 }
             }
             if (action.payload === ONLY_IN_DATA_BASE) {
                 return {
                     ...state,
-                    dogs: [...state.filteredogs].filter(e => {
+                    dogs: [...state.Alldogs].filter(e => {
                         if (!expresion.test(e.id)) return e
-                    })
+                    }),
+                    filteredogs: [...state.Alldogs].filter(e => {
+                        if (!expresion.test(e.id)) return e
+                    }),
+
                 }
             }
             if (action.payload === ALL) {
 
                 return {
                     ...state,
-                    dogs: [...state.filteredogs]
+                    dogs: [...state.Alldogs]
                 }
             }
             break
@@ -94,6 +126,7 @@ export default function reducer(state = initialState, action) {
                 return {
                     ...state,
                     dogs: [...state.dogs].sort((a, b) => {
+                        console.log(1)
                         return parseInt(a.weight.split("-")[0]) < parseInt(b.weight.split("-")[0]) ? 1 : -1
                     }),
 
@@ -122,13 +155,13 @@ export default function reducer(state = initialState, action) {
         }
         case FILTER_BY_TEMP: {
             if (action.payload === ALL) {
-                console.log("entro al caso del All")
+
                 return { ...state, dogs: state.filteredogs }
             } else {
-                console.log("entro al caso del if dentro del filter by temp")
+
                 return {
                     ...state,
-                    dogs: [...state.dogs].filter(e => e.temperament.includes(action.payload))
+                    dogs: [...state.filteredogs].filter(e => e.temperament.includes(action.payload))
                 }
             }
 

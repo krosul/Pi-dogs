@@ -11,7 +11,7 @@ export default function OrderByHeight() {
   }
 
   return (
-    <div>Order by height:
+    <div>Order by weight:
       <select onChange={(e) => setOrder(e)} className={styles.f}>
         <option value="All">Todos</option>
         <option value="heavy">Mas pesados</option>
