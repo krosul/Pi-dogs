@@ -9,7 +9,7 @@ export default function SearchByTemp() {
 
   useEffect(() => {
     dispatch(getTemperaments());
-  }, []);
+  }, [dispatch]);
 
   function onChangeTemp(e) {
     e.preventDefault();

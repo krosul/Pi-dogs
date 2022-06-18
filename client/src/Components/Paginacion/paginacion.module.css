@@ -1,32 +1,64 @@
-.pageNumbers button {
+.pageNumbers {
   padding: 10px;
-  border: transparent;
-  
-  /* border-radius: 0%; */
-}
 
-/* .pageNumbers button.active {
-  background-color: rgb(193, 13, 13);
-  color: black;
-} */
-.pageNumbers button {
+  border: transparent;
   background-color: transparent;
   color: rgb(15, 11, 11);
   font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+.C {
+  display: flex;
+  justify-content: center;
 }
 .pageNumbers button:hover {
-  background-color: white;
-  color: rgb(0, 0, 0);
+
+  color: #23adad;
+}
+
+.pageNumberSelected {
+  background-color: #23adad;
+  color: white;
+  border: transparent;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 .containerFromCards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-.numbers{
+.numbers {
   display: flex;
-  justify-content: center;
   align-content: center;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 5rem;
+  width: 25rem;
+  font-family: "Poppins", sans-serif;
+  align-items: center;
+  margin: 0.8rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin: 3rem;
+  border-radius: 0.6rem;
+  background: #ffffff;
+}
+.next{
+  padding: 10px;
+  border: transparent;
+  background-color: transparent;
+  color:  #23adad;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
 }

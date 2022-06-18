@@ -18,7 +18,7 @@ const getAllDogs = () => {
             let [dogs, dogsDb] = response
             console.log(dogsDb)
             let dogsFromApi = dogs.data.map((dog => {
-                // if (dog.name === "Smooth Fox Terrier") console.log("este es el console.log para verificar el peso NaN"+dog)
+                
                 return {
                     id: dog.id,
                     name: dog.name,

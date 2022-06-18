@@ -1,14 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import style from "./card.module.css";
+import style from "./card.module.scss";
 
 export default function CartForDogs({ dog }) {
-  // console.log(dog)
   return (
-    <div className={style.card}>
-      <Link to={"/dogs/" + dog.id}>
-        <h1>{dog.name}</h1>
-      </Link>
+    <figure className={style.card}>
+      <h1 className={style.h1}>{dog.name}</h1>
       <img
         className={style.image}
         src={
@@ -18,15 +15,21 @@ export default function CartForDogs({ dog }) {
         }
         alt="Foto perrito"
       />
-      <p>
-        their temperaments are:
-        {dog.temperament
-          ? dog.temperament
-          : dog.Temperaments.map((e) => e.name)}
-      </p>
-      <p>your height is:{dog.height}cm</p>
-      <p>your weight is:{dog.weight}kg</p>
-      <p>their average years of life are:{dog.life_span}</p>
-    </div>
+      <figcaption>
+        <h3>More Info</h3>
+        <p>
+          their temperaments are:
+          {dog.temperament
+            ? dog.temperament
+            : dog.Temperaments.map((e) => e.name)}
+        </p>
+        <p>your height is:{dog.height}cm</p>
+        <p>your weight is:{dog.weight}kg</p>
+        <p>their average years of life are:{dog.life_span}</p>
+        <Link to={"/dogs/" + dog.id}>
+          <button>More info</button>
+        </Link>
+      </figcaption>
+    </figure>
   );
 }

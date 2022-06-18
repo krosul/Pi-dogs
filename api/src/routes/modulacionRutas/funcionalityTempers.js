@@ -17,6 +17,7 @@ module.exports = {
         }).filter(e => e)
 
         temperFinal = [...new Set(temperFinal.map(e => e[0]))]
+        
         await temperFinal.forEach(e => {
             Temperament.create({
                 name: e
@@ -24,6 +25,6 @@ module.exports = {
         })
 
         return { data: temperFinal.map(e=>{return {"name":e}}) }
-        // return "entro a la funcion getTemperaments"
+        
     }
 }

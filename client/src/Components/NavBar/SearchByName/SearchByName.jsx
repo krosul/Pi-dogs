@@ -18,7 +18,7 @@ export default function SearchByName() {
   }
   useEffect(() => {
     dispatch(searchByName(input));
-  }, [input]);
+  }, [input,dispatch]);
   return (
     <div className={styles.divContainer}>
       search by race:

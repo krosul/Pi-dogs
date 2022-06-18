@@ -8,7 +8,7 @@ export default function Detail() {
   const { id } = useParams();
   let dispatch = useDispatch();
   let dog = useSelector((e) => e.dog);
-  console.log(dog)
+  console.log(dog);
   useEffect(() => {
     dispatch(getDetail(id));
 
@@ -23,12 +23,14 @@ export default function Detail() {
         <Link to="/dogs/">
           <div className={style.container}>
             <div className={style.full}></div>
-            <div class={style.arrow}></div>
+            <div className={style.arrow}></div>
           </div>
           <div className={style.full}></div>
         </Link>
         {!dog[0] ? (
-          <div className={style.loader}></div>
+          <div className={style.containerLoader}>
+            <div className={style.loader}></div>
+          </div>
         ) : (
           <div className={style.card}>
             <h1>{dog[0].name}</h1>

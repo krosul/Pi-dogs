@@ -23,7 +23,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 dogs: action.payload.map(e => {
-                    if (e.id === 179) console.log(e)
+                    
                     if (!expresion.test(e.id) && !e.temperament) {
 
                         return {
@@ -167,7 +167,7 @@ export default function reducer(state = initialState, action) {
 
         }
         case SEARCH_NAME: {
-            console.log(action.payload)
+            
             return {
                 ...state,
                 dogs: action.payload ?

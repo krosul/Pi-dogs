@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setOrderByName } from "../../../store/actions";
 import SearchByName from "../SearchByName/SearchByName";
 import OrderByHeight from "../orderByHeight/orderByHeight";
@@ -11,7 +11,7 @@ import logo from "../../../image/2926722-removebg-preview.png";
 
 export default function Navbar() {
   const dispatch = useDispatch();
-  //   let temperament = useSelector((e) => e.temperament);
+  
 
   function setOrder(e) {
     e.preventDefault();

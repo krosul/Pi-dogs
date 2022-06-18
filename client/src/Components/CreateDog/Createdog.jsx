@@ -37,7 +37,7 @@ export default function Createdog() {
 
   useEffect(() => {
     dispatch(getTemperaments());
-  }, []);
+  }, [dispatch]);
 
   function setStateInput(e) {
     e.preventDefault();
@@ -51,9 +51,6 @@ export default function Createdog() {
 
   function onHandleSubmit(e) {
     e.preventDefault();
-    console.log(
-      "entro a hacer el despacho de la accion para crear al nuevo perro"
-    );
     dispatch(
       PostDogs({
         name: `${input.name}`,
@@ -83,134 +80,145 @@ export default function Createdog() {
   }
 
   return (
-    <div className={style.card}>
-      <Link to="/dogs/">
-        <div className={style.container}>
+    <div className={style.containerAll}>
+      <div className={style.card}>
+        <Link to="/dogs/">
+          <div className={style.container}>
+            <div className={style.full}></div>
+            <div className={style.arrow}></div>
+          </div>
           <div className={style.full}></div>
-          <div class={style.arrow}></div>
+        </Link>
+        <div>
+          <h1>Create a breed</h1>
         </div>
-        <div className={style.full}></div>
-      </Link>
-      <div>
-        <h1>Create a breed</h1>
-      </div>
 
-      <form className={style.form} onSubmit={(e) => onHandleSubmit(e)}>
-        <div>
-          name:
-          <input
-            className={style.input}
-            placeholder="breed name"
-            value={input.name}
-            name="name"
-            onChange={(e) => setStateInput(e)}
-          ></input>
-          <p>{error.name}</p>
-        </div>
-        <div>
-          maxHeight:
-          <input
-            className={style.input}
-            placeholder="max height"
-            value={input.maxHeight}
-            name="maxHeight"
-            onChange={(e) => setStateInput(e)}
-          ></input>
-          <p>{error.maxHeight}</p>
-          minHeight:
-          <input
-            className={style.input}
-            placeholder="min height"
-            value={input.minHeight}
-            name="minHeight"
-            onChange={(e) => setStateInput(e)}
-          ></input>
-          <p>{error.minHeight}</p>
-        </div>
-        <div>
-          <div>
-            maxWeight:
+        <form className={style.form} onSubmit={(e) => onHandleSubmit(e)}>
+          <div className={style.containerInput}>
+            name:
             <input
+              type="text"
               className={style.input}
-              placeholder="max weight"
-              value={input.maxWeight}
-              name="maxWeight"
+              placeholder="breed name"
+              value={input.name}
+              name="name"
               onChange={(e) => setStateInput(e)}
             ></input>
-            <p>{error.maxWeight}</p>
+            <p>{error.name}</p>
           </div>
-          minWeight:
-          <input
-            className={style.input}
-            placeholder="min weight"
-            value={input.minWeight}
-            name="minWeight"
-            onChange={(e) => setStateInput(e)}
-          ></input>
-          <p>{error.minWeight}</p>
-        </div>
+          <div className={style.containerInput}>
+            maxHeight:
+            <input
+              type="number"
+              className={style.input}
+              placeholder="max height"
+              value={input.maxHeight}
+              name="maxHeight"
+              onChange={(e) => setStateInput(e)}
+            ></input>
+            <p>{error.maxHeight}</p>
+            minHeight:
+            <input
+              type="number"
+              className={style.input}
+              placeholder="min height"
+              value={input.minHeight}
+              name="minHeight"
+              onChange={(e) => setStateInput(e)}
+            ></input>
+            <p>{error.minHeight}</p>
+          </div>
+          <div>
+            <div className={style.containerInput}>
+              maxWeight:
+              <input
+                type="number"
+                className={style.input}
+                placeholder="max weight"
+                value={input.maxWeight}
+                name="maxWeight"
+                onChange={(e) => setStateInput(e)}
+              ></input>
+              <p>{error.maxWeight}</p>
+            </div>
+            <div className={style.containerInput}>
+              minWeight:
+              <input
+                type="number"
+                className={style.input}
+                placeholder="min weight"
+                value={input.minWeight}
+                name="minWeight"
+                onChange={(e) => setStateInput(e)}
+              ></input>
+              <p>{error.minWeight}</p>
+            </div>
+          </div>
 
-        <div>
-          maximum years of life:
-          <input
-            className={style.input}
-            placeholder="maximum years of life"
-            value={input.maxlifeSpan}
-            name="maxlifeSpan"
-            onChange={(e) => setStateInput(e)}
-          ></input>
-          <p>{error.maxlifeSpan}</p>
-        </div>
-        <div>
-          minimun years of life:
-          <input
-            className={style.input}
-            placeholder="minimun years of life"
-            value={input.minlifeSpan}
-            name="minlifeSpan"
-            onChange={(e) => setStateInput(e)}
-          ></input>
-          <p>{error.minlifeSpan}</p>
-        </div>
-        <div>
-          {temperaments &&
-            temperaments.map((e) => {
-              return (
-                <button
-                  key={e.id}
-                  className={
-                    input.temperament.includes(e.id)
-                      ? style.buttonA
-                      : style.button
-                  }
-                  value={e.id}
-                  onClick={(e) => setStateTemperaments(e)}
-                >
-                  {e.name}
-                </button>
-              );
-            })}
-        </div>
-        <button
-          type="submit"
-          className={style.button}
-          disabled={
-            Object.keys(error).length !== 0 ||
-            !input.name ||
-            !input.maxHeight ||
-            !input.maxWeight ||
-            !input.maxlifeSpan ||
-            !input.minHeight ||
-            !input.minWeight ||
-            !input.minlifeSpan ||
-            !input.temperament[0]
-              ? true
-              : false
-          }
-        >
-          Finish
-        </button>
-      </form>
+          <div className={style.containerInput}>
+            maximum years of life:
+            <input
+              type="number"
+              className={style.input}
+              placeholder="maximum years of life"
+              value={input.maxlifeSpan}
+              name="maxlifeSpan"
+              onChange={(e) => setStateInput(e)}
+            ></input>
+            <p>{error.maxlifeSpan}</p>
+          </div>
+          <div className={style.containerInput}>
+            minimun years of life:
+            <input
+              type="number"
+              className={style.input}
+              placeholder="minimun years of life"
+              value={input.minlifeSpan}
+              name="minlifeSpan"
+              onChange={(e) => setStateInput(e)}
+            ></input>
+            <p>{error.minlifeSpan}</p>
+          </div>
+          <div className={style.containerButtons}>
+            {temperaments &&
+              temperaments.map((e) => {
+                return (
+                  <button
+                    key={e.id}
+                    className={
+                      input.temperament.includes(e.id)
+                        ? style.buttonA
+                        : style.button
+                    }
+                    value={e.id}
+                    onClick={(e) => setStateTemperaments(e)}
+                  >
+                    {e.name}
+                  </button>
+                );
+              })}
+          </div>
+          <button
+            type="submit"
+            className={style.button}
+            disabled={
+              Object.keys(error).length !== 0 ||
+              !input.name ||
+              !input.maxHeight ||
+              !input.maxWeight ||
+              !input.maxlifeSpan ||
+              !input.minHeight ||
+              !input.minWeight ||
+              !input.minlifeSpan ||
+              !input.temperament[0]
+                ? true
+                : false
+            }
+          >
+            Finish
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

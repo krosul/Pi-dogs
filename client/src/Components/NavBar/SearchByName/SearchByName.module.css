@@ -4,4 +4,7 @@
 }
 .f{
     font-family: 'Roboto', sans-serif;
+    border: none;
+    border-radius: 0.5rem;
+    background: #e8e8e8;
 }

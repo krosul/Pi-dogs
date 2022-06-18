@@ -13,40 +13,38 @@ export const RESET_DETAIL="RESET_DETAIL"
 
 export function getAllDogs() {
     return function (dispatch) {
-        return fetch("http://localhost:3001/dogs/")
-            .then(response => response.json())
+        return axios("/dogs/")
             .then(response => {
-                dispatch({ type: GET_ALL_DOGS, payload: response })
+                dispatch({ type: GET_ALL_DOGS, payload: response.data })
             })
             .catch(error => console.error(error))
     }
 }
 export function getDetail(id){
     return function(dispatch){
-        return fetch("http://localhost:3001/dogs/"+id)
-        .then(response=>response.json())
+        return axios("/dogs/"+id)
         .then(response=>{
-            dispatch({type:GET_DETAIL,payload:response})
+            dispatch({type:GET_DETAIL,payload:response.data})
         })
     }
 }
 export  function PostDogs(payload){
-    return async function(){
-        const response= await axios.post("http://localhost:3001/dogs/dog",payload);
-        return response
+    return function(){
+        return axios.post("/dogs/dog",payload)
+               .then(response=>response.data)
+               .catch(error=>console.error(error))
+        
     }
 }
 export function getTemperaments() {
     return function (dispatch) {
-        return fetch("http://localhost:3001/temperament")
-        .then(info => info.json())
-            .then(temperaments => dispatch({ type: GET_TEMPERAMENTS, payload: temperaments }))
+        return axios("/temperament")
+            .then(temperaments => dispatch({ type: GET_TEMPERAMENTS, payload: temperaments.data }))
             .catch(error => console.error(error))
     }
 }
 
 export function setOrderByName(payload) {
-    console.log("entro a la accion de serorderbyname")
     return {
         type: SET_ORDER_BY_NAME,
         payload
